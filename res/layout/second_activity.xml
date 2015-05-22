@@ -56,4 +56,12 @@
          android:layout_centerHorizontal="true"
          android:text="Save selected title to database" />
 
+     <Button
+         android:id="@+id/showDetailsButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/saveToDatabaseButton"
+         android:layout_alignLeft="@+id/saveToDatabaseButton"
+         android:text="Show details of selected book" />
+
 </RelativeLayout>

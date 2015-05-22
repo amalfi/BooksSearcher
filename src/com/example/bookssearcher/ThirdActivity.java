@@ -68,8 +68,9 @@ public class ThirdActivity extends Activity
 		        	String currentTitle = String.valueOf(currentMap.get("title"));
 		        	if(currentTitle.equals(selectedTitle))
 		        	{
+		        		String bookId = String.valueOf(currentMap.get("id"));
 		        		selectedTitleEditText.setText(currentMap.get("description").toString());
-		        	  	Book selectedBook = new Book(currentTitle, currentMap.get("description").toString());
+		        	  	Book selectedBook = new Book(bookId,currentTitle, currentMap.get("description").toString());
 		        		DataHolder.setSelectedBook(selectedBook);
 		  	          
 		        	}
@@ -111,8 +112,6 @@ public class ThirdActivity extends Activity
 		        	i+=1;
 		        }
 				onResume();
-				/*finish();
-				startActivity(getIntent());*/
 			}
 		});
         

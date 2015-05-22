@@ -87,7 +87,8 @@ public class RequestService
                 }
                 result = chaine.toString();
 
-            } catch (IOException e)
+            }
+            catch (IOException e)
             {
             	 Log.d("Wystapil blad podczas uzyskiwania odpwoiedzi z serwera", Log.getStackTraceString(e.getCause().getCause()));
             }

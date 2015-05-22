@@ -61,10 +61,12 @@ public class DatabaseManager
            {
                do
                {
+            	   String id=c.getString(c.getColumnIndex("id"));
                    String title = c.getString(c.getColumnIndex("title"));
                    String description = c.getString(c.getColumnIndex("description"));
                    
                    HashMap<String,Object> currentResultMap = new HashMap<String,Object>();
+                   currentResultMap.put("id", id);
                    currentResultMap.put("title", title);
                    currentResultMap.put("description", description);
                    result.add(currentResultMap);

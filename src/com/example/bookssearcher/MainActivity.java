@@ -56,7 +56,8 @@ public class MainActivity extends Activity
 					    JSONObject item = arr.getJSONObject(i);
 					    String title = item.getString("Title");
 					    String description= item.getString("Description");
-					    Book book = new Book(title, description);
+					    String id = item.getString("ID");
+					    Book book = new Book(id, title, description);
 					    books.add(book);
 					}
 				} 
