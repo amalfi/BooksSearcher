@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.bookssearcher.SecondActivity" >
+
+     <Spinner
+      android:id="@+id/albumsDropdownList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@+id/musicAlbumsTextView"
+      android:layout_below="@+id/findAlbumsButton"
+      android:layout_marginTop="@dimen/activity_horizontal_margin"
+      android:background="@android:drawable/btn_dropdown"
+      android:spinnerMode="dropdown" />
+
+     <Button
+         android:id="@+id/stepBackButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="38dp"
+         android:text="Step back" />
+
+     <Button
+         android:id="@+id/saveToDatabaseButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/stepBackButton"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="26dp"
+         android:text="Save selected title to database" />
+
+     <EditText
+         android:id="@+id/bookDescriptionEditText"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/albumsDropdownList"
+         android:layout_alignRight="@+id/albumsDropdownList"
+         android:layout_below="@+id/albumsDropdownList"
+         android:layout_marginTop="29dp"
+         android:ems="10"
+         android:inputType="textMultiLine" >
+
+         <requestFocus />
+     </EditText>
+
+</RelativeLayout>
