@@ -27,6 +27,17 @@ public class ThirdActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.third_activity);
      
+        final Button stepBackToSecondActivity = (Button) findViewById(R.id.stepBackOnThirdActivityButton);
+        final Intent secondActivityIntent = new Intent(this, SecondActivity.class);
+        
+        stepBackToSecondActivity.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View arg0) 
+			{
+				startActivity(secondActivityIntent);
+			}
+        });
     }
 
 

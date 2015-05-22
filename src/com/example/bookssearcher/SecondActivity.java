@@ -36,11 +36,22 @@ public class SecondActivity extends Activity
         
         final Button saveToDatabaseButton = (Button) findViewById(R.id.saveToDatabaseButton);
         final Button stepBackButton = (Button) findViewById(R.id.stepBackButton);
+        final Button showAllSavedBooks = (Button) findViewById(R.id.showALlSavedBooksButton);
         final Intent mainActivityIntent = new Intent(this, MainActivity.class);
+        final Intent thirdActivityIntent = new Intent(this, ThirdActivity.class);
         final EditText bookDescriptionEditText = (EditText) findViewById(R.id.bookDescriptionEditText);
         
         final SQLiteDatabase sampleDB = this.openOrCreateDatabase(dbName, MODE_PRIVATE, null);   
-
+        
+        showAllSavedBooks.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View arg0) 
+			{
+				startActivity(thirdActivityIntent);
+			}
+        });
+        
         saveToDatabaseButton.setOnClickListener(new View.OnClickListener() 
         {	
 			@Override

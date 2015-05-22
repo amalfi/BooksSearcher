@@ -18,24 +18,6 @@
       android:background="@android:drawable/btn_dropdown"
       android:spinnerMode="dropdown" />
 
-     <Button
-         android:id="@+id/stepBackButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="38dp"
-         android:text="Step back" />
-
-     <Button
-         android:id="@+id/saveToDatabaseButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/stepBackButton"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="26dp"
-         android:text="Save selected title to database" />
-
      <EditText
          android:id="@+id/bookDescriptionEditText"
          android:layout_width="wrap_content"
@@ -49,5 +31,32 @@
 
          <requestFocus />
      </EditText>
+
+     <Button
+         android:id="@+id/stepBackButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="24dp"
+         android:text="Step back" />
+
+     <Button
+         android:id="@+id/saveToDatabaseButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/showALlSavedBooksButton"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="18dp"
+         android:text="Save selected title to database" />
+
+     <Button
+         android:id="@+id/showALlSavedBooksButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/stepBackButton"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="18dp"
+         android:text="Show all saved books" />
 
 </RelativeLayout>
