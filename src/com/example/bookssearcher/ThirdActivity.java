@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.bookssearcher.db.DatabaseManager;
+import com.example.bookssearcher.model.Book;
+import com.example.bookssearcher.model.DataHolder;
 import com.example.musicalbumsinformationmanager.R;
 
 
@@ -37,6 +39,8 @@ public class ThirdActivity extends Activity
         final EditText selectedTitleEditText = (EditText) findViewById(R.id.savedBookDescriptionEditText);
         final SQLiteDatabase sampleDB = this.openOrCreateDatabase(dbName, MODE_PRIVATE, null);   
         final LinkedHashSet<HashMap<String,Object>> resultFromDatabase = databaseManager.selectFromDatabase(sampleDB, "SELECT title, description FROM " + tableName);
+        final Button removeSelectedBookButton = (Button) findViewById(R.id.removeSelectedBookFromDBButton);
+        
         final String[] titlesArray = new String[resultFromDatabase.size()];
         int i=0;
         
@@ -65,8 +69,11 @@ public class ThirdActivity extends Activity
 		        	if(currentTitle.equals(selectedTitle))
 		        	{
 		        		selectedTitleEditText.setText(currentMap.get("description").toString());
+		        	  	Book selectedBook = new Book(currentTitle, currentMap.get("description").toString());
+		        		DataHolder.setSelectedBook(selectedBook);
+		  	          
 		        	}
-	          }
+		      }
 			}
 
 			@Override
@@ -84,6 +91,38 @@ public class ThirdActivity extends Activity
 				startActivity(secondActivityIntent);
 			}
         });
+        
+        removeSelectedBookButton.setOnClickListener(new View.OnClickListener() 
+        {
+			
+			@Override
+			public void onClick(View v) 
+			{
+				DatabaseManager dbManager = new DatabaseManager();
+				////sampleDB.execSQL("DELETE FROM " + tableName);
+				Book selectedBook = DataHolder.getSelectedBook();
+				String deleteQuery = "DELETE FROM " + tableName + " WHERE title='"+selectedBook.getTitle()+"'";
+				LinkedHashSet<HashMap<String,Object>> resultAfterDelete = dbManager.deleteFromDatabase(sampleDB, deleteQuery);
+				int i=0;
+				for(HashMap<String,Object> currentMap : resultAfterDelete)
+		        {
+		        	String currentTitle = String.valueOf(currentMap.get("title"));
+		        	titlesArray[i]=currentTitle;
+		        	i+=1;
+		        }
+				onResume();
+				/*finish();
+				startActivity(getIntent());*/
+			}
+		});
+        
+        
+    	}
+    @Override
+    protected void onResume() {
+
+       super.onResume();
+       this.onCreate(null);
     }
 
 

@@ -42,6 +42,38 @@ public class DatabaseManager
      
        return result;
     }
-   
+    /**
+     * Function delete from db by query and return new list of objects
+     * @param sampleDB
+     * @param query
+     * @return
+     */
+   public LinkedHashSet<HashMap<String,Object>> deleteFromDatabase(SQLiteDatabase sampleDB,String query)
+   {
+	   sampleDB.execSQL(query);
+	   
+	   LinkedHashSet<HashMap<String, Object>> result = new LinkedHashSet<HashMap<String,Object>>();
+   	
+       Cursor c = sampleDB.rawQuery(query, null);
+       if (c != null )
+       {
+           if  (c.moveToFirst()) 
+           {
+               do
+               {
+                   String title = c.getString(c.getColumnIndex("title"));
+                   String description = c.getString(c.getColumnIndex("description"));
+                   
+                   HashMap<String,Object> currentResultMap = new HashMap<String,Object>();
+                   currentResultMap.put("title", title);
+                   currentResultMap.put("description", description);
+                   result.add(currentResultMap);
+               }
+               while (c.moveToNext()); //Move to next row
+           } 
+       }
+    
+      return result;
+   }
     
 }
