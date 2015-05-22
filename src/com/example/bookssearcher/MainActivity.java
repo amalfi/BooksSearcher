@@ -42,7 +42,7 @@ public class MainActivity extends Activity
             public void onClick(View v)
             {
                 String artistName = artistNameEditText.getText().toString();
-                String jsonResponse = requestService.getDataFromRequestAsJSON(artistName);
+                String jsonResponse = requestService.getBooksBasedOnKeyword(artistName);
                 
                 try 
                 {

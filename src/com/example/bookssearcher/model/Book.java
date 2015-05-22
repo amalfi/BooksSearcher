@@ -2,11 +2,9 @@ package com.example.bookssearcher.model;
 
 import java.io.Serializable;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class Book implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private String description;
 	

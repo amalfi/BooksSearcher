@@ -33,12 +33,19 @@
      </EditText>
 
      <Button
+         android:id="@+id/showALlSavedBooksButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/stepBackButton"
+         android:layout_centerHorizontal="true"
+         android:text="Show all saved books" />
+
+     <Button
          android:id="@+id/stepBackButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
          android:layout_centerHorizontal="true"
-         android:layout_marginBottom="24dp"
          android:text="Step back" />
 
      <Button
@@ -47,16 +54,6 @@
          android:layout_height="wrap_content"
          android:layout_above="@+id/showALlSavedBooksButton"
          android:layout_centerHorizontal="true"
-         android:layout_marginBottom="18dp"
          android:text="Save selected title to database" />
-
-     <Button
-         android:id="@+id/showALlSavedBooksButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/stepBackButton"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="18dp"
-         android:text="Show all saved books" />
 
 </RelativeLayout>

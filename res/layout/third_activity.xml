@@ -8,6 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bookssearcher.ThirdActivity" >
 
+     <Spinner
+      android:id="@+id/savedAlbumsDropdownList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_horizontal_margin"
+      android:background="@android:drawable/btn_dropdown"
+      android:spinnerMode="dropdown" />
+     
     <Button
         android:id="@+id/stepBackOnThirdActivityButton"
         android:layout_width="wrap_content"
@@ -16,5 +24,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="57dp"
         android:text="Step back" />
+
+    <EditText
+        android:id="@+id/savedBookDescriptionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/savedAlbumsDropdownList"
+        android:layout_alignRight="@+id/savedAlbumsDropdownList"
+        android:layout_below="@+id/savedAlbumsDropdownList"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

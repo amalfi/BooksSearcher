@@ -2,13 +2,11 @@ package com.example.bookssearcher.db;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.widget.Toast;
 
 public class DatabaseManager
 {
@@ -19,15 +17,13 @@ public class DatabaseManager
      * @param sampleDB
      * @param query //"SELECT title, description FROM " + tableName - query example
      */
-    public List<HashMap<String,Object>> selectFromDatabase(SQLiteDatabase sampleDB, String query)
+    public LinkedHashSet<HashMap<String,Object>> selectFromDatabase(SQLiteDatabase sampleDB, String query)
     {
-    	List<HashMap<String, Object>> result = new ArrayList<HashMap<String,Object>>();
+    	LinkedHashSet<HashMap<String, Object>> result = new LinkedHashSet<HashMap<String,Object>>();
     	
         Cursor c = sampleDB.rawQuery(query, null);
-        //If Cursor is valid
         if (c != null )
         {
-            //Move cursor to first row
             if  (c.moveToFirst()) 
             {
                 do

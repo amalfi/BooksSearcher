@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:theme="@style/AppBaseTheme" android:name="com.example.bookssearcher.SecondActivity"></activity>
+        <activity android:name="com.example.bookssearcher.ThirdActivity" android:theme="@style/AppBaseTheme"></activity>
     </application>
 
 </manifest>

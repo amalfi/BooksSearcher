@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -59,14 +58,15 @@ public class SecondActivity extends Activity
 			{
 				try
 				{
-		            sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (versionname VARCHAR);");
+		            sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (title VARCHAR, description VARCHAR);");
 		            sampleDB.execSQL("INSERT INTO " + tableName + " Values ('"+DataHolder.getSelectedBook().getTitle()+"','"+DataHolder.getSelectedBook().getDescription()+"');");
 		  
 		        } 
 				catch (SQLiteException se ) 
 				{
 		            Toast.makeText(getApplicationContext(), "Couldn't create or open the database", Toast.LENGTH_LONG).show();
-		        } finally 
+		        }
+				finally 
 		        {
 		            if (sampleDB != null) 
 		            {
@@ -103,7 +103,6 @@ public class SecondActivity extends Activity
         
         dropdown.setOnItemSelectedListener(new OnItemSelectedListener() 
         {
-
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long id) 
