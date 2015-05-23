@@ -3,10 +3,13 @@ package com.example.bookssearcher;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -27,7 +30,8 @@ public class SecondActivity extends Activity
     private final String dbName = "BooksDatabase";
     private final String tableName = "Books";
     
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -39,8 +43,20 @@ public class SecondActivity extends Activity
         final Button showDetailsOfSelectedBook = (Button) findViewById(R.id.showDetailsButton);
         final Intent mainActivityIntent = new Intent(this, MainActivity.class);
         final Intent thirdActivityIntent = new Intent(this, ThirdActivity.class);
+        final Intent fourthActivityIntent = new Intent(this, FourthActivity.class);
+        final AlertDialog alertDialog = new AlertDialog.Builder(SecondActivity.this).create();
+        alertDialog.setTitle("Insert confirmation");
+        alertDialog.setMessage("Selected book was added to database");
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() 
+        {
+                public void onClick(DialogInterface dialog, int which) 
+                {
+                Toast.makeText(getApplicationContext(), "Confirmed", Toast.LENGTH_SHORT).show();
+                }
+        });
+ 
+    
         final EditText bookDescriptionEditText = (EditText) findViewById(R.id.bookDescriptionEditText);
-        
         final SQLiteDatabase sampleDB = this.openOrCreateDatabase(dbName, MODE_PRIVATE, null);   
         
         showDetailsOfSelectedBook.setOnClickListener(new View.OnClickListener() 
@@ -48,7 +64,7 @@ public class SecondActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{
-				//przejscie do nastepnego activity ze szczegolami 
+				startActivity(fourthActivityIntent);
 			}
 		});
         
@@ -69,18 +85,27 @@ public class SecondActivity extends Activity
 				try
 				{
 		            sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (id VARCHAR, title VARCHAR, description VARCHAR);");
-		            sampleDB.execSQL("INSERT INTO " + tableName + " Values ('"+DataHolder.getSelectedBook().getId()+"','" + DataHolder.getSelectedBook().getTitle()+"','"+DataHolder.getSelectedBook().getDescription()+"');");
-		  
+		            Book selectedBook = DataHolder.getSelectedBook();
+		            String selectedBookId = selectedBook.getId();
+		            String selectedBookTitle = selectedBook.getTitle();
+		            String selectedBookDescription = selectedBook.getDescription();
+		            
+		            sampleDB.execSQL("INSERT INTO " + tableName + " Values ('"+selectedBookId+"','" + selectedBookTitle+"','"+selectedBookDescription+"');");
+		            // Showing Alert Message
+		            alertDialog.show();
+		            
 		        } 
 				catch (SQLiteException se ) 
 				{
-		            Toast.makeText(getApplicationContext(), "Couldn't create or open the database", Toast.LENGTH_LONG).show();
+					System.out.println(se.getStackTrace());
+					Log.d("SecondActivity", "Wystapil blad podczas polecenia INSERT", se.getCause());
+					Log.i("Error : " , "Message is :- " + se.getMessage());
+					sampleDB.execSQL("DROP TABLE IF EXISTS " + tableName);
 		        }
 				finally 
 		        {
 		            if (sampleDB != null) 
 		            {
-		                //sampleDB.execSQL("DELETE FROM " + tableName);
 		                sampleDB.close();
 		            }
 		        }

@@ -100,7 +100,6 @@ public class ThirdActivity extends Activity
 			public void onClick(View v) 
 			{
 				DatabaseManager dbManager = new DatabaseManager();
-				////sampleDB.execSQL("DELETE FROM " + tableName);
 				Book selectedBook = DataHolder.getSelectedBook();
 				String deleteQuery = "DELETE FROM " + tableName + " WHERE title='"+selectedBook.getTitle()+"'";
 				LinkedHashSet<HashMap<String,Object>> resultAfterDelete = dbManager.deleteFromDatabase(sampleDB, deleteQuery);
