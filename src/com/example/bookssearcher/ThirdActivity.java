@@ -2,7 +2,6 @@ package com.example.bookssearcher;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -35,21 +34,27 @@ public class ThirdActivity extends Activity
      
         DatabaseManager databaseManager = new DatabaseManager();
         final Button stepBackToSecondActivity = (Button) findViewById(R.id.stepBackOnThirdActivityButton);
+        final Button showDetailsOfSelectedBook = (Button) findViewById(R.id.showDetailsOfSelectedBookButton);
         final Intent secondActivityIntent = new Intent(this, SecondActivity.class);
+        final Intent fourthActivityIntent = new Intent(this, FourthActivity.class);
         final EditText selectedTitleEditText = (EditText) findViewById(R.id.savedBookDescriptionEditText);
         final SQLiteDatabase sampleDB = this.openOrCreateDatabase(dbName, MODE_PRIVATE, null);   
-        final LinkedHashSet<HashMap<String,Object>> resultFromDatabase = databaseManager.selectFromDatabase(sampleDB, "SELECT title, description FROM " + tableName);
         final Button removeSelectedBookButton = (Button) findViewById(R.id.removeSelectedBookFromDBButton);
+        final LinkedHashSet<HashMap<String,Object>> resultFromDatabase = databaseManager.selectFromDatabase(sampleDB, "SELECT id, title, description FROM " + tableName);
+        Utils utils = new Utils();
+        final String[]titlesArray = utils.getTitlesOfBooksSavedInDatabase(resultFromDatabase);
         
-        final String[] titlesArray = new String[resultFromDatabase.size()];
-        int i=0;
-        
-        for(HashMap<String,Object> currentMap : resultFromDatabase)
+       
+        showDetailsOfSelectedBook.setOnClickListener(new View.OnClickListener() 
         {
-        	String currentTitle = String.valueOf(currentMap.get("title"));
-        	titlesArray[i]=currentTitle;
-        	i+=1;
-        }
+			
+			@Override
+			public void onClick(View v) 
+			{
+				Book book = DataHolder.getSelectedBook();
+				startActivity(fourthActivityIntent);
+			}
+		});
         
         Spinner dropdown = (Spinner)findViewById(R.id.savedAlbumsDropdownList);
         final String[] items = titlesArray;
@@ -99,10 +104,12 @@ public class ThirdActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{
+				SQLiteDatabase database = openOrCreateDatabase(dbName, MODE_PRIVATE, null);   
+				
 				DatabaseManager dbManager = new DatabaseManager();
 				Book selectedBook = DataHolder.getSelectedBook();
 				String deleteQuery = "DELETE FROM " + tableName + " WHERE title='"+selectedBook.getTitle()+"'";
-				LinkedHashSet<HashMap<String,Object>> resultAfterDelete = dbManager.deleteFromDatabase(sampleDB, deleteQuery);
+				LinkedHashSet<HashMap<String,Object>> resultAfterDelete = dbManager.deleteFromDatabase(database, deleteQuery);
 				int i=0;
 				for(HashMap<String,Object> currentMap : resultAfterDelete)
 		        {
@@ -116,12 +123,12 @@ public class ThirdActivity extends Activity
         
         
     	}
-    @Override
-    protected void onResume() {
-
-       super.onResume();
-       this.onCreate(null);
-    }
+	    @Override
+	    protected void onResume() {
+	
+	       super.onResume();
+	       this.onCreate(null);
+	    }
 
 
 }

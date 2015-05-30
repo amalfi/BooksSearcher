@@ -59,8 +59,7 @@ public class RequestService
      * 
      * @param bookId
      * @return
-     */
-    public  String getBookDetailsByID(String bookId)
+     */    public  String getBookDetailsByID(String bookId)
     {
 	        //Absoultelly necessary to avoid 'NetworkOnMainThread Exception'
 	        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

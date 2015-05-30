@@ -8,13 +8,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bookssearcher.ThirdActivity" >
 
+    <Button
+        android:id="@+id/removeSelectedBookFromDBButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/stepBackOnThirdActivityButton"
+        android:layout_alignLeft="@+id/savedBookDescriptionEditText"
+        android:text="Remove selected book from db" />
+
+    <Button
+        android:id="@+id/stepBackOnThirdActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Step back" />
+
+    <Button
+        android:id="@+id/showDetailsOfSelectedBookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/removeSelectedBookFromDBButton"
+        android:layout_alignLeft="@+id/savedAlbumsDropdownList"
+        android:layout_alignRight="@+id/savedAlbumsDropdownList"
+        android:text="Show details of selected book" />
+
     <Spinner
         android:id="@+id/savedAlbumsDropdownList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
 
@@ -24,7 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
         android:text="List of saved Books"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -32,28 +56,9 @@
         android:id="@+id/savedBookDescriptionEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/stepBackOnThirdActivityButton"
+        android:layout_above="@+id/showDetailsOfSelectedBookButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="56dp"
         android:ems="10"
         android:inputType="textMultiLine" />
-
-    <Button
-        android:id="@+id/stepBackOnThirdActivityButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="27dp"
-        android:text="Step back" />
-
-    <Button
-        android:id="@+id/removeSelectedBookFromDBButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/stepBackOnThirdActivityButton"
-        android:layout_alignLeft="@+id/savedBookDescriptionEditText"
-        android:text="Remove selected book from db" />
 
 </RelativeLayout>

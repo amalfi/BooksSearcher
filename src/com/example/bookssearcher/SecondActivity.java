@@ -19,17 +19,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.bookssearcher.db.DatabaseManager;
 import com.example.bookssearcher.model.Book;
 import com.example.bookssearcher.model.DataHolder;
 import com.example.musicalbumsinformationmanager.R;
 
-
+/**
+ * Activity which contains books finded by given keyword
+ * @author Marcin
+ *
+ */
 public class SecondActivity extends Activity
 {
 
     private final String dbName = "BooksDatabase";
     private final String tableName = "Books";
-    
+		
     @SuppressWarnings("deprecation")
 	@Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +49,7 @@ public class SecondActivity extends Activity
         final Intent mainActivityIntent = new Intent(this, MainActivity.class);
         final Intent thirdActivityIntent = new Intent(this, ThirdActivity.class);
         final Intent fourthActivityIntent = new Intent(this, FourthActivity.class);
+        Utils utils = new Utils();
         final AlertDialog alertDialog = new AlertDialog.Builder(SecondActivity.this).create();
         alertDialog.setTitle("Insert confirmation");
         alertDialog.setMessage("Selected book was added to database");
@@ -78,7 +84,7 @@ public class SecondActivity extends Activity
         });
         
         saveToDatabaseButton.setOnClickListener(new View.OnClickListener() 
-        {	
+        {	 
 			@Override
 			public void onClick(View v) 
 			{
@@ -93,8 +99,8 @@ public class SecondActivity extends Activity
 		            sampleDB.execSQL("INSERT INTO " + tableName + " Values ('"+selectedBookId+"','" + selectedBookTitle+"','"+selectedBookDescription+"');");
 		            // Showing Alert Message
 		            alertDialog.show();
-		            
-		        } 
+		            //sampleDB.execSQL("DROP TABLE IF EXISTS " + tableName);
+				} 
 				catch (SQLiteException se ) 
 				{
 					System.out.println(se.getStackTrace());
@@ -122,16 +128,8 @@ public class SecondActivity extends Activity
         });
         
 
-        final List<Book> books = DataHolder.getBookList();
-        String[] onlyTitles = new String[books.size()];
-        for(int i=0; i<onlyTitles.length; i++)
-        {
-        	Book currentBook = books.get(i);
-        	onlyTitles[i]=currentBook.getTitle();
-        }
-        
         Spinner dropdown = (Spinner)findViewById(R.id.albumsDropdownList);
-        final String[] items = onlyTitles;
+        final String[] items = utils.getTitlesArray();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         dropdown.setAdapter(adapter);
         
@@ -142,6 +140,8 @@ public class SecondActivity extends Activity
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long id) 
 			{
+				List<Book> books = DataHolder.getBookList();
+				
 				Book selectedBook = books.get(position);
 				bookDescriptionEditText.setText(selectedBook.getDescription());
 				DataHolder.setSelectedBook(selectedBook);
@@ -150,7 +150,7 @@ public class SecondActivity extends Activity
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0)
 			{
-				Book selectedBook = books.get(0);
+				Book selectedBook = DataHolder.getBookList().get(0);
 				bookDescriptionEditText.setText(selectedBook.getDescription());
 				DataHolder.setSelectedBook(selectedBook);
 			}        
@@ -159,3 +159,4 @@ public class SecondActivity extends Activity
 
 
 }
+
